@@ -17,7 +17,7 @@
 
     <nav class="navegacion">
         <a class="navegacion__enlace" href="index.php">Tienda</a>
-        <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.html">Nosotros</a>
+        <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Nosotros</a>
     </nav>
 
     <main class="contenedor">

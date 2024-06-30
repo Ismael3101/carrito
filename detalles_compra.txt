@@ -1,0 +1,6 @@
+Producto: Camiseta
+Talla: M
+Cantidad: 1
+Precio Unitario: 25.00
+Total: 25
+

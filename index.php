@@ -16,16 +16,20 @@
     </header>
 
     <nav class="navegacion">
-        <a class="navegacion__enlace navegacion__enlace--activo" href="index.php">Tienda</a>
-        <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
-    </nav>
+    <a class="navegacion__enlace navegacion__enlace--activo" href="index.php">Tienda</a>
+    <a class="navegacion__enlace" href="nosotros.php">Nosotros</a>
+    <a class="navegacion__enlace" href="carrito.php">
+        <img src="img/carrito.png" alt="Carrito" style="width: 40px; height: 35px; vertical-align: middle;">
+    </a>
+</nav>
+
 
     <main class="contenedor">
         <h1>Nuestros Productos</h1>
 
         <div class="grid">
             <div class="producto">
-                <a href="producto.html?img=1.jpg">
+                <a href="producto.php?img=1.jpg">
                     <img class="producto__imagen" src="img/1.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">VueJS</p>
@@ -34,7 +38,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=2.jpg">
+                <a href="producto.php?img=2.jpg">
                     <img class="producto__imagen" src="img/2.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">AngularJS</p>
@@ -43,7 +47,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=3.jpg">
+                <a href="producto.php?img=3.jpg">
                     <img class="producto__imagen" src="img/3.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">ReactJS</p>
@@ -52,7 +56,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=4.jpg">
+                <a href="producto.php?img=4.jpg">
                     <img class="producto__imagen" src="img/4.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Redux</p>
@@ -61,7 +65,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=5.jpg">
+                <a href="producto.php?img=5.jpg">
                     <img class="producto__imagen" src="img/5.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Node.js</p>
@@ -70,7 +74,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=6.jpg">
+                <a href="producto.php?img=6.jpg">
                     <img class="producto__imagen" src="img/6.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">SASS</p>
@@ -79,7 +83,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=7.jpg">
+                <a href="producto.php?img=7.jpg">
                     <img class="producto__imagen" src="img/7.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">HTML5</p>
@@ -88,7 +92,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=8.jpg">
+                <a href="producto.php?img=8.jpg">
                     <img class="producto__imagen" src="img/8.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Github</p>
@@ -97,7 +101,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=9.jpg">
+                <a href="producto.php?img=9.jpg">
                     <img class="producto__imagen" src="img/9.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">BulmaCSS</p>
@@ -106,7 +110,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=10.jpg">
+                <a href="producto.php?img=10.jpg">
                     <img class="producto__imagen" src="img/10.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">TypeScript</p>
@@ -115,7 +119,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=11.jpg">
+                <a href="producto.php?img=11.jpg">
                     <img class="producto__imagen" src="img/11.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Drupal</p>
@@ -124,7 +128,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=12.jpg">
+                <a href="producto.php?img=12.jpg">
                     <img class="producto__imagen" src="img/12.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">JavaScript</p>
@@ -133,7 +137,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=13.jpg">
+                <a href="producto.php?img=13.jpg">
                     <img class="producto__imagen" src="img/13.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">GraphQL</p>
@@ -142,7 +146,7 @@
                 </a>
             </div>  <!--.producto-->
             <div class="producto">
-                <a href="producto.html?img=14.jpg">
+                <a href="producto.php?img=14.jpg">
                     <img class="producto__imagen" src="img/14.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">WordPress</p>
