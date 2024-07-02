@@ -73,8 +73,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
     <title>FrontEnd Store - Carrito de Compras</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header__logo {
+            max-width: 150px;
+        }
+
+        .navegacion {
+            background-color: #444;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .navegacion__enlace {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+
+        .navegacion__enlace--activo {
+            background-color: #555;
+        }
+
+        .contenedor {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Estilos específicos para el carrito */
+        .carrito__producto {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .carrito__info {
+            flex: 1;
+        }
+
+        .carrito__subtotal {
+            font-weight: bold;
+        }
+
+        .carrito__eliminar {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .carrito__confirmar {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .carrito__confirmar:hover,
+        .carrito__eliminar:hover {
+            opacity: 0.8;
+        }
+
+        /* Estilos para el modal */
         .modal {
             display: none;
             position: fixed;
@@ -86,28 +193,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.5);
         }
+
         .modal-contenido {
-            background-color: #fefefe;
-            margin: 15% auto;
+            background-color: white;
+            margin: 10% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            position: relative;
         }
+
         .cerrar {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
+
         .cerrar:hover,
         .cerrar:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
         }
-        .error {
-            color: red;
-            display: none;
+
+        .modal-header {
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .modal-body {
+            padding: 15px;
+        }
+
+        .modal-footer {
+            text-align: right;
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .modal-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .modal-form input[type="text"],
+        .modal-form input[type="tel"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .modal-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .modal-form input[type="submit"]:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -133,18 +294,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
             $totalCarrito = 0;
             foreach ($_SESSION['carrito'] as $producto) {
                 $subtotal = $producto['cantidad'] * $producto['precio'];
+                echo '<div class="carrito__producto">';
+                echo '<div class="carrito__info">';
                 echo '<p>' . $producto['nombre'] . ' - Talla: ' . $producto['talla'] . ' - Cantidad: ' . $producto['cantidad'] . ' - Precio Unitario: $' . $producto['precio'] . ' - Subtotal: $' . $subtotal . '</p>';
+                echo '</div>';
+                echo '<form method="POST" style="display:inline;">';
+                echo '<input type="hidden" name="producto_id" value="' . $producto['id'] . '">';
+                echo '<input type="hidden" name="talla" value="' . $producto['talla'] . '">';
+                echo '<input type="submit" name="eliminar" value="Eliminar" class="carrito__eliminar">';
+                echo '</form>';
+                echo '</div>';
                 $totalCarrito += $subtotal;
-                echo '<form method="POST" style="display:inline;">
-                        <input type="hidden" name="producto_id" value="' . $producto['id'] . '">
-                        <input type="hidden" name="talla" value="' . $producto['talla'] . '">
-                        <input type="submit" name="eliminar" value="Eliminar">
-                      </form>';
             }
-            echo '<h3>Total del Carrito: $' . $totalCarrito . '</h3>';
+            echo '<h3 class="carrito__subtotal">Total del Carrito: $' . $totalCarrito . '</h3>';
 
             // Botón para confirmar compra y solicitar datos personales
-            echo '<button onclick="mostrarModalDatosPersonales()">Confirmar Compra</button>';
+            echo '<button onclick="mostrarModalDatosPersonales()" class="carrito__confirmar">Confirmar Compra</button>';
 
         } else {
             echo '<p>El carrito está vacío.</p>';
@@ -160,15 +325,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
     <div id="modalDatosPersonales" class="modal">
         <div class="modal-contenido">
             <span class="cerrar" onclick="cerrarModalDatosPersonales()">&times;</span>
-            <form id="formDatosPersonales" action="confirmacion.php" method="POST">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre_personal" required>
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required>
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
-                <input type="submit" value="Confirmar Datos">
-            </form>
+            <div class="modal-header">
+                <h2>Datos Personales</h2>
+            </div>
+            <div class="modal-body">
+                <form id="formDatosPersonales" class="modal-form" action="confirmacion.php" method="POST">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre_personal" required>
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                    <input type="submit" value="Confirmar Datos">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Front End Store - Todos los derechos Reservados 2022.</p>
+            </div>
         </div>
     </div>
 
@@ -183,3 +356,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
     </script>
 </body>
 </html>
+
